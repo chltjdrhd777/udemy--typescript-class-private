@@ -40,9 +40,9 @@ const accounting3 = {
 };
 accounting3.describe();
 
-//private and public access
+//private
 class practicePravate {
-  employees: string[] = [];
+  private employees: string[] = [];
 
   addstaff(people) {
     this.employees.push(people);
@@ -57,5 +57,21 @@ class practicePravate {
 const staff = new practicePravate();
 staff.addstaff("anderson");
 staff.addstaff("marry");
-staff.employees[2] = "goerge";
+// staff.employees[2] = "goerge";  it cannot be possible after I add "private" in front of the property "employees" because the "private" restrict the access from the outside of the class
+// and only allow users to use the path "addstaff" If anyone want to modify the information of the array "employees"
 staff.staffInfo(); // ['anderson' , 'marry']
+
+//shorthand initialization
+class notRedundance {
+  //private it : string
+  //public is : string
+  constructor(private it: string, public is: string) {
+    //By just writing like that "private or public" + property's name : type ===> shorten the fields and initializers.
+    //this.it = it;
+    //this.is = is;
+  }
+}
+
+const checkShortening = new notRedundance("does it", "work?");
+console.log(checkShortening.is);
+//console.log(checkShortening.it); --> makes an error and it is intended because "it" is private so I cannot approach to this property outside the class.
